@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env", env_file_encoding="utf-8"
+        env_file=".env", env_file_encoding="utf-8", extra="ignore"
     )
 
     BOT_TOKEN: SecretStr
@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     GMAIL_APP_PASSWORD: SecretStr = SecretStr("")
     IMAP_SERVER: str = "imap.gmail.com"
     CHECK_INTERVAL: int = 15
+
+    PROXY_URL: str | None = None
 
     @property
     def db_url(self) -> str:
